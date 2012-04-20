@@ -7,7 +7,7 @@ defined('C5_EXECUTE') or die(_("Access Denied."));
  *
  * 	Example Implementation
  *  ======================
- *  Loader::library('csv_export', 'data_transport');
+ *  Loader::library('csv/export', 'burrito');
  *  
  *  class ProductExport extends CsvExport {
  *  
@@ -22,6 +22,10 @@ defined('C5_EXECUTE') or die(_("Access Denied."));
  *  	protected function before($db) {
  *  
  *  	}
+ * 
+ * 		protected function header($db, $first_row) {
+ * 			return array_keys($first_row);
+ * 		}
  *  
  *  	protected function eachRow($db, $row) {
  *  		return array_values($row);
@@ -58,9 +62,12 @@ abstract class CsvExport {
 	private $h;
 	private $data;
 	
-	public function __construct() {
-		
+	public function __construct() {		
 		$this->db = Loader::db();
+	}
+	
+	private function init() {
+		
 		$this->h = $this->getHandle();
 		$this->data = $this->getData($this->db);
 		
@@ -75,6 +82,8 @@ abstract class CsvExport {
 		if (empty($this->data)) {
 			throw new Exception('There is not data to export');
 		}
+		
+		return true;
 	}
 	
 	private function getHandle() {
@@ -114,11 +123,11 @@ abstract class CsvExport {
 		ob_start();
 		
 		// header
-        fputcsv($this->h, array_keys($this->data[0]));
+        fputcsv($this->h, $this->header($this->db, $this->data[0]));
 		
 		// rows
 		foreach($this->data as $row){
-            fputcsv($this->h, $this->eachRow($db, $row));
+            fputcsv($this->h, $this->eachRow($this->db, $row));
         }
 
 		$csv = ob_get_clean();
@@ -131,7 +140,8 @@ abstract class CsvExport {
 	}
 	
 	final public function run() {
-		return $this->callback('before', $this->db)
+		return $this->init()
+			&& $this->callback('before', $this->db)
 			&& $this->output()
 			&& $this->callback('after', $this->db)
 		;	

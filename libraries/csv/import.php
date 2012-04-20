@@ -8,7 +8,7 @@ ini_set("auto_detect_line_endings", true);
  * 
  *  Example Implementation
  *  ======================
- *  Loader::library('csv_import', 'data_transport');
+ *  Loader::library('csv/import', 'burrito');
  *  
  *  class ProductImport extends CsvImport {
  *  	
