@@ -47,7 +47,7 @@ class DataHelper {
 	public function saveMulti($fields, $data, $id) {
 		foreach ($fields as $key => $field) {
 			if ($field['multi']) {
-				$model = Burrito::get($field['relation_model']);
+				$model = BModel::get($field['relation_model']);
 				
 				// delete any existing ones
 				foreach ($model->find($field['foreign_key'].' = ?', $id) as $item) {

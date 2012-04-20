@@ -160,7 +160,7 @@ class BurritoModel extends ADOdb_Active_Record {
 			$pageId = $page->getCollectionID();
 		}
 		
-		$object = Burrito::get($objectHandle, $pageId, $pageColumn);
+		$object = BModel::get($objectHandle, $pageId, $pageColumn);
 		
 		// return object if found
 		if ($object->id) {
@@ -181,8 +181,8 @@ class BurritoModel extends ADOdb_Active_Record {
 	
 }
 
-if (!class_exists('Burrito')) {
-	class_alias('BurritoModel', 'Burrito');
+if (!class_exists('BModel')) {
+	class_alias('BurritoModel', 'BModel');
 }
 
 ?>
