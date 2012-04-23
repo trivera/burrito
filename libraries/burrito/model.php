@@ -104,54 +104,6 @@ class BurritoModel extends ADOdb_Active_Record {
 		return $items;
 	}
 	
-       // files helper methods
-	public function getFileForField($field){
-		return is_numeric($value = $this->{$field})
-			? self::getFile($value)
-			: null
-		;
-	}
-
-	static public function getFile($file_id){
-		return File::getById($file_id);
-	}
-
-	static public function getThumbnail($obj, $width=100, $height=100, $options=array()){
-		UtilityHeler::defaults(array(
-			'obj'		=> $obj,
-			'width' 	=> $width,
-			'height' 	=> $height,
-			'crop' 		=> false
-		), $options);
-
-		$im = Loader::helper('image');
-
-		return call_user_func_array(array($im, 'getThumnail'), $options);
-	}
-
-	static public function outputThumbnail($obj, $width=100, $height=100, $params=array()){
-		UtilityHelper::defaults(array(
-			'obj'		=> $obj,
-			'width'		=> $width,
-			'height'	=> $height,
-			'alt'	 	=> null,
-			'return' 	=> true,
-			'crop'		=> false
-		), $params);
-
-		$im = Loader::helper('image');
-
-		return call_user_func_array(array($im, 'outputThumbnail'), $params);
-	}
-
-	static public function outputThumbnailForFileId($file_id, $width=100, $height=100, $options=array()){
-		if ($f = self::getFile($file_id)) {
-			return self::outputThumbnail($f, $width, $height, $options);
-		}
-
-		return null;
-	}
-	
 	/*	*/
 	static public function getObjectFromPage($objectHandle, $pageId=null, $pageColumn="page_id") {
 		
