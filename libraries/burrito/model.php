@@ -133,7 +133,7 @@ class BurritoModel extends ADOdb_Active_Record {
 	
 }
 
-if (!class_exists('BModel')) {
+if (!class_exists('BModel') && function_exists('class_alias')) {
 	class_alias('BurritoModel', 'BModel');
 }
 
