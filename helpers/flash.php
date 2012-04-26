@@ -62,11 +62,11 @@ class FlashHelper {
 	
 	// PHP < 5.3 does not support late static binding :(
 	static public function error($input) {
-		return self::__callStatic('error', $input);
+		return self::__callStatic('error', array($input));
 	}
 	
 	static public function notice($input) {
-		return self::__callStatic('notice', $input);
+		return self::__callStatic('notice', array($input));
 	}
 }
 
