@@ -76,6 +76,11 @@ abstract class CsvImport {
 	
 	private function checkMimeType() {
 		
+		// this check is not supported in PHP < 5.3 :(
+		if (PHP_VERSION < '5.3') {
+			return true;
+		}
+		
 		$finfo = finfo_open(FILEINFO_MIME_TYPE); // return mime type ala mimetype extension
 		
 		if (!in_array(($_=finfo_file($finfo, $this->filename)), $this->accepted_mime_types)) {

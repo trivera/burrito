@@ -60,7 +60,7 @@ class FlashHelper {
 		}
 	}
 	
-	// PHP < 5.3.x legacy functions
+	// PHP < 5.3 does not support late static binding :(
 	static public function error($input) {
 		return self::__callStatic('error', $input);
 	}
