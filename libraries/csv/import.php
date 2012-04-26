@@ -82,7 +82,7 @@ abstract class CsvImport {
 			throw new Exception("You must upload a valid CSV file; a file of type {$_} was given");
 		}
 		
-		fclose($finfo);
+		finfo_close($finfo);
 	}
 	
 	private function getHandle(){
@@ -135,19 +135,27 @@ abstract class CsvImport {
 		
 		foreach($data as $field => $value) {
 			
-			if (strlen($value) && method_exists($this, $_="{$this->fields[$field]}Format")) {
-				$data[$field] = $this->{$_}($value);
+			if (method_exists($this, $_="{$this->fields[$field]}Format")) {
+				$data[$field] = $this->{$_}(trim($value));
 			}
 		}
 		
 		return $data;
 	}
 	
-	protected function dateFormat($value){
+	protected function intFormat($value) {
+		return is_numeric($value) ? (int)$value : 0;
+	}
+	
+	protected function stringFormat($value) {
+		return empty($value) ? null : $value;
+	}
+	
+	protected function dateFormat($value) {
  		return date('Y-m-d', strtotime($value));
 	}
 	
-	protected function datetimeFormat($value){
+	protected function datetimeFormat($value) {
 		return date('Y-m-d H:i:s', strtotime($value));
 	}
 	

@@ -61,6 +61,7 @@ abstract class CsvExport {
 	private $filename;
 	private $h;
 	private $data;
+	private $_csv_output;
 	
 	public function __construct() {		
 		$this->db = Loader::db();
@@ -120,23 +121,26 @@ abstract class CsvExport {
 	}
 	
 	private function capture(){
-		ob_start();
 		
-		// header
-        fputcsv($this->h, $this->header($this->db, $this->data[0]));
+		if (is_null($this->_csv_output)) {
+			ob_start();
 		
-		// rows
-		foreach($this->data as $row){
-            fputcsv($this->h, $this->eachRow($this->db, $row));
-        }
+			// header
+	        fputcsv($this->h, $this->header($this->db, $this->data[0]));
+		
+			// rows
+			foreach($this->data as $row){
+	            fputcsv($this->h, $this->eachRow($this->db, $row));
+	        }
 
-		$csv = ob_get_clean();
+			$this->_csv_output = ob_get_clean();
 		
-		if (fclose($this->h) === false) {
-			throw new Exception('There was an error closing the output stream');
+			if (fclose($this->h) === false) {
+				throw new Exception('There was an error closing the output stream');
+			}
 		}
 		
-		return $csv;
+		return $this->_csv_output;
 	}
 	
 	final public function run() {
@@ -147,6 +151,25 @@ abstract class CsvExport {
 		;	
 		
 		
+	}
+	
+	protected function backup($path){
+		$th = Loader::helper('text');
+		$filename = $th->uncamelcase(get_class($this)) . '-' . time() . '.csv.gz';
+		$path = getcwd() . $path;
+		
+		// open file to write backup
+		if (($h=fopen($path.'/'.$filename, 'w')) !== false) {
+			fwrite($h, gzencode($this->capture(), 9));
+			fclose($h);
+		}
+		
+		// could not open file for writing
+		else {
+			throw new Exception("Could not open {$filename} for writing. Check to write permissions on {$path}");
+		}
+		
+		return true;
 	}
 	
 	

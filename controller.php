@@ -5,7 +5,7 @@ defined('C5_EXECUTE') or die(_("Access Denied."));
 class BurritoPackage extends Package {
 	
 	protected $pkgHandle = 'burrito';
-	protected $appVersionRequired = '5.5.0';
+	protected $appVersionRequired = '5.4.0';
 	protected $pkgVersion = '1.0.0';
 	
 	public function on_start() {
@@ -18,6 +18,11 @@ class BurritoPackage extends Package {
 	
 	public function getPackageName() {
 		return t("Burrito");
+	}
+	
+	// Concrete 5.4.0 legacy function
+	public function install(){
+		parent::install();
 	}
 	
 }
