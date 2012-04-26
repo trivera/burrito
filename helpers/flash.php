@@ -59,7 +59,15 @@ class FlashHelper {
 			Loader::packageElement('errors', 'burrito', array('errors' => self::get('error', true)));
 		}
 	}
-
+	
+	// PHP < 5.3.x legacy functions
+	static public function error($input) {
+		return self::__callStatic('error', $input);
+	}
+	
+	static public function notice($input) {
+		return self::__callStatic('notice', $input);
+	}
 }
 
 // initialize
