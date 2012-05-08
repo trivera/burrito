@@ -1,0 +1,27 @@
+#!/usr/bin/env php
+
+<?php
+
+// fake C5 execute for CLI direct script execution
+define('C5_EXECUTE', true);
+
+$pwd = getcwd();
+$path = $pwd;
+
+while ($path != '/') {
+	
+	if (file_exists($cli=($path.'/packages/burrito/libraries/cli/cli.php'))) {
+		require_once $cli;
+		exit;
+	}
+	
+	$path = dirname($path);
+}
+
+echo "Burrito is not available from {$pwd}\n";
+echo "Please check your project directory for packages/burrito\n";
+echo "\n";
+echo "To install burrito, run the following in your project's root directory:\n";
+echo "\tgit submodule add git://github.com/trivera/burrito.git\n";
+echo "\tgit submodule init\n";
+echo "\n";

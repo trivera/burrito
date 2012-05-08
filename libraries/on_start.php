@@ -1,15 +1,19 @@
 <?php
+
 defined('C5_EXECUTE') or die(_("Access Denied."));
 
-/* 
-	Misc global functions and things that happen
-	during Concrete5's on_start event hook.
-*/
+// config
+Loader::library('burrito/config', 'burrito');
+BurritoConfig::loadConfig();
 
-// Load required libraries right away
+// helpers
+Loader::helper('flash', 'burrito');
+
+// libraries
 Loader::library('burrito/model', 'burrito');
 Loader::library('burrito/controller', 'burrito');
-Loader::helper('flash', 'burrito');
+Loader::library('burrito/block_controller', 'burrito');
+
 
 // Replace the image feed background with a subtle texture
 define('WHITE_LABEL_DASHBOARD_BACKGROUND_SRC', '/packages/burrito/img/texture.png');
@@ -20,8 +24,9 @@ define('WHITE_LABEL_DASHBOARD_BACKGROUND_SRC', '/packages/burrito/img/texture.pn
 */
 if (!function_exists('d')) {
 	function d() {
+		$args = func_get_args();
 		echo '<pre>';
-		foreach (func_get_args() as $var) {
+		foreach ($args as $var) {
 			print_r($var);
 			echo '<br />';
 		}

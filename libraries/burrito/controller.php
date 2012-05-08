@@ -16,5 +16,12 @@ class BurritoController extends Controller {
             $this->set('message', $messages[0]);
         }
     }
+
+	// convenience wrapper for coalesce helper
+	protected function coalesce(){
+		$args = func_get_args();
+		$buh = Loader::helper('burrito/utility', 'burrito');
+		return call_user_func_array(array($buh, 'coalesce'), $args);
+	}
     
 }

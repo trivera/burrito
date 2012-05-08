@@ -4,9 +4,13 @@ defined('C5_EXECUTE') or die("Access Denied.");
 
 class BurritoModel extends ADOdb_Active_Record {
 	
-	public function __construct() {
+	public function __construct($data=null) {
 	 	$db = Loader::db();
 	 	parent::__construct();
+	
+		if (is_array($data)) {
+			$this->setData($data);
+		}
 	}
 	
 	/* 
@@ -72,7 +76,7 @@ class BurritoModel extends ADOdb_Active_Record {
 			if ($value == '') {
 				$value = null;
 			}
-			$this->$key = $value;
+			$this->{$key} = $value;
 		}
 	}
 	
@@ -87,6 +91,22 @@ class BurritoModel extends ADOdb_Active_Record {
 		}
 		parent::replace();
 	}
+	
+	
+	public function getFile($field) {
+		return File::getById($this->{$field});
+	}
+	
+	public function getThumbnail($field, $width=100, $height=100, $options=array()) {
+		if ($_ = $this->getFile($field)) {
+			
+			$bih = Loader::helper('burrito/image', 'burrito');
+			return $bih->outputThumbnail($_, $width, $height, $options);
+		}
+
+		return null;
+	}
+	
 	
 	/*
 		Generates & returns a key => value array suitable for using in C5's 
@@ -129,8 +149,7 @@ class BurritoModel extends ADOdb_Active_Record {
 				return false;
 			}
 		}
-	}
-	
+	}	
 }
 
 if (!class_exists('BModel') && function_exists('class_alias')) {

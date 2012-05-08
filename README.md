@@ -4,8 +4,24 @@ This is a group of libraries, classes, and other tools that greatly increase the
 
 ## Installation
 
-Download or clone this repo to your Concrete5 site's *packages/* directory. Then, visit **yoursite.com/index.php/dashboard/extend/install/** and install the package. Once the package is installed, you can begin consuming the Burrito.
+From your project's root directory
+
+    $ git submodule add git://github.com/trivera/burrito.git packages/burrito
+    $ git submodule init
+
+Then, visit **yoursite.com/index.php/dashboard/extend/install/** and install the package. Once the package is installed, you can begin consuming the Burrito.
+
+## CLI
+
+Burrito includes a helper for command line oriented tasks.  To install it:
+
+    $ cd packages/burrito
+    $ bin/burrito install cli
+
+This copies `burrito` to `/usr/local/bin`.
 
 ## Documentation / Usage
 
-Someone needs to write this :)
+From any directory within your concrete5 project, run
+
+   $ burrito help
