@@ -23,7 +23,7 @@ class BurritoConfig {
 			self::$_config['app'] = parse_ini_file($_);
 		}
 		else {
-			throw new Exception("Burrito could not load {$_}");
+			return false;
 		}
 		
 		// extras
