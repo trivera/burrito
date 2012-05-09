@@ -18,23 +18,27 @@
 			<form id="dataForm" action="<?php echo $this->action('save') ?>" method="POST">
 				<table class="zebra-striped">
 					<tbody>
-						<?php foreach ($fields as $key => $field): ?>							
-							<tr id="row-<?php echo $key ?>">
-								<td class="form-label">
-									<?php echo $field['label'] ?>
-									<?php if ($field['required']): ?>
-										<span class="req">*</span>
-									<?php endif; ?>
-								</td>
-								<td>
-									<?php
-										echo $fh->output($key, $field, $data);
-										if ($field['multi']) {
-											Loader::packageElement('multi', 'burrito', array('key' => $key, 'field' => $field, 'data' => $data));
-										}
-									?>
-								</td>
-							</tr>
+						<?php foreach ($fields as $key => $field): ?>
+							<?php if ((isset($field['minimum_level']) && AccessHelper::canAccess($field['minimum_level'])) || !isset($field['minimum_level'])): ?>
+								
+								<tr id="row-<?php echo $key ?>">
+									<td class="form-label">
+										<?php echo $field['label'] ?><?php echo $field['minimum_level'] ?>
+										<?php if ($field['required']): ?>
+											<span class="req">*</span>
+										<?php endif; ?>
+									</td>
+									<td>
+										<?php
+											echo $fh->output($key, $field, $data);
+											if ($field['multi']) {
+												Loader::packageElement('multi', 'burrito', array('key' => $key, 'field' => $field, 'data' => $data));
+											}	
+
+										?>
+									</td>
+								</tr>
+							<?php endif; ?>
 						<?php endforeach; ?>
 					</tbody>
 				</table>
