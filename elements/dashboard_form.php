@@ -23,7 +23,7 @@
 								
 								<tr id="row-<?php echo $key ?>">
 									<td class="form-label">
-										<?php echo $field['label'] ?><?php echo $field['minimum_level'] ?>
+										<?php echo $field['label'] ?>
 										<?php if ($field['required']): ?>
 											<span class="req">*</span>
 										<?php endif; ?>
