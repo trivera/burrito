@@ -59,4 +59,11 @@ class BurritoUtilityHelper {
         return $filter ? array_filter($ret) : $ret;
     }
 
+	public function capture_template($path, $vars=array()){
+		ob_start();
+		extract($vars);
+		include($path);
+		return ob_get_clean();
+	}
+
 }
