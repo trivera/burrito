@@ -7,7 +7,7 @@
 
 
 // get defines
-exec('php /usr/local/bin/burrito inject config', $cmds);
+exec("php " . dirname(__FILE__) . "/bin/burrito inject config", $cmds);
 
 // eval (forgive me, Lord)
 foreach ($cmds as $_) {
