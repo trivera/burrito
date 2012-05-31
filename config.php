@@ -7,9 +7,9 @@
 
 
 // get defines
-exec("php " . dirname(__FILE__) . "/bin/burrito inject config", $cmds);
+$json = exec("php " . dirname(__FILE__) . "/bin/burrito config json");
 
-// eval (forgive me, Lord)
-foreach ($cmds as $_) {
-	eval($_);
+// define
+foreach (json_decode($json) as $key => $value) {
+	define($key, $value);
 }
