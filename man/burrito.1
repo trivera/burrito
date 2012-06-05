@@ -1,0 +1,126 @@
+.\" generated with Ronn/v0.7.3
+.\" http://github.com/rtomayko/ronn/tree/0.7.3
+.
+.TH "BURRITO" "1" "June 2012" "" ""
+.
+.SH "NAME"
+\fBburrito\fR \- Burrito CLI
+.
+.SH "SYNOPSIS"
+.
+.nf
+
+burrito <command> [<arg>\.\.\.]
+.
+.fi
+.
+.SH "DESCRIPTION"
+Burrito is a bundle of awesome for concrete5\. It contains many features to make doing your chores a lot easier; and fun!
+.
+.SH "COMMANDS"
+Here\'s what you get!
+.
+.TP
+\fBhelp\fR \fB[\fR \fIman\fR \fB|\fR \fIpretty\fR \fB]\fR
+\fIman\fR display this man page (\fBdefault\fR)
+.
+.IP
+\fIpretty\fR displays nicely\-formatted help in your browser
+.
+.TP
+\fBinstall\fR \fB[\fR \fIcli\fR \fB|\fR \fIconfig\fR \fB|\fR \fIall\fR \fB]\fR
+\fIcli\fR installs the burrito command line interface helper to \fI/usr/local/bin\fR\. To update the helper, re\-run this command\. See also \fIINSTALLATION\fR
+.
+.IP
+\fIconfig\fR installs burrito configuration templates to \fIconfig/burrito/\fR
+.
+.IP
+\fIall\fR installs everything (\fBdefault\fR)
+.
+.TP
+\fBconfig\fR \fB[\fR \fIdebug\fR \fB|\fR \fIjson\fR \fB]\fR:
+.
+.IP
+\fIdebug\fR dumps environment\-based compiled config (\fBdefault\fR)
+.
+.IP
+\fIjson\fR dumps compiled config as JSON\.
+.
+.IP
+To utilize this tool, \fBconfig/site\.php\fR should be checked into version control and should only include the following code:
+.
+.IP "" 4
+.
+.nf
+
+<?php
+require DIR_BASE\.\'/packages/burrito/config\.php\';
+.
+.fi
+.
+.IP "" 0
+
+.
+.TP
+\fBsync\fR \fB[\fR \fIdata\fR \fB|\fR \fIfiles\fR\fB|\fR\fIall\fR \fB]\fR
+Synchronize data and/or files with the production environment\.
+.
+.IP
+\fIdata\fR sync datatabase only
+.
+.IP
+\fIfiles\fR sync concrete5 files only
+.
+.IP
+\fIall\fR sync everything (\fBdefault\fR)
+.
+.SH "INSTALLATION"
+It\'s recommended to install Burrito as a Git submodule\.
+.
+.IP "" 4
+.
+.nf
+
+$ git submodule add \e
+git://github\.com/trivera/burrito\.git packages/burrito
+
+$ git submodule init
+.
+.fi
+.
+.IP "" 0
+.
+.P
+If your project is not using git, you can just download/extract the zipball \fIhttps://github\.com/trivera/burrito/zipball/master\fR in your \fIpackages\fR directory\.
+.
+.P
+After Burrito files are in place, It\'s \fBhighly\fR recommended you install the Burrito CLI helper
+.
+.IP "" 4
+.
+.nf
+
+$ packages/burrito/bin/burrito install cli
+.
+.fi
+.
+.IP "" 0
+.
+.P
+Now the full power of Burrito is at your fingertips!
+.
+.IP "" 4
+.
+.nf
+
+$ burrito help
+.
+.fi
+.
+.IP "" 0
+.
+.SH "COPYRIGHT"
+Burrito is copyright (C) 2012 Trivera Interactive
+.
+.SH "SEE ALSO"
+\fIhttps://github\.com/trivera/burrito\fR

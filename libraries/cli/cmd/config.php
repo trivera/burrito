@@ -1,7 +1,17 @@
 <?php
 
 // arguments
-if (empty($args)) {
+if (count($args) > 1) {
+	echo $tty->error('burrito-config expects a maximum of 1 argument');
+	exit;
+}
+elseif (empty($args)) {
+	$args[] = 'debug';
+}
+
+
+// debug
+if (in_array($args[0], array('debug'))) {
 	print_r(_compileConfig());
 	exit;
 }
@@ -9,6 +19,7 @@ if (empty($args)) {
 // site.php
 if (in_array($args[0], array('json'))) {
 	echo json_encode(_compileConfig());
+	exit;
 }
 
 function _compileConfig() {

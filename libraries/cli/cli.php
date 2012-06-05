@@ -5,9 +5,12 @@
 #	die('burrito_cli must be run from the command line');
 #}
 
+// fake C5 execute for CLI direct script execution
+define('C5_EXECUTE', true);
 
 // constants
-define('__C5__', $path);
+define('__C5__', $_SERVER['PWD']);
+define('__BURRITO__', __C5__.'/packages/burrito');
 define('__CLI__', dirname(__FILE__));
 $script = array_shift($_SERVER['argv']);
 $cmd = array_shift($_SERVER['argv']);
@@ -37,4 +40,10 @@ require_once __CLI__.'/tty.php';
 $tty = new Tty();
 
 // init
-cmd_exec( cmd_exists($cmd) ? $cmd : 'help' );
+if (cmd_exists($cmd)) {
+	cmd_exec($cmd);
+}
+else {
+	echo $tty->error("burrito-{$cmd} is not a valid command");
+	echo "for more help, run: burrito help\n\n";
+}

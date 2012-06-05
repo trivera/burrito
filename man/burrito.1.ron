@@ -1,0 +1,90 @@
+burrito(1) - Burrito CLI
+========================
+
+## SYNOPSIS
+
+    burrito <command> [<arg>...]
+
+
+## DESCRIPTION
+
+Burrito is a bundle of awesome for concrete5. It contains many
+features to make doing your chores a lot easier; and fun!
+
+
+## COMMANDS
+
+Here's what you get!
+
+  * `help` `[` <man> `|` <pretty> `]`:
+    <man> display this man page (`default`)
+    
+    <pretty> displays nicely-formatted help in your browser
+    
+    
+  * `install` `[` <cli> `|` <config> `|` <all> `]`:
+    <cli> installs the burrito command line interface helper to
+    _/usr/local/bin_. To update the helper, re-run this command.
+    See also [INSTALLATION][]
+    
+    <config> installs burrito configuration templates to
+    _config/burrito/_
+    
+    <all> installs everything (`default`)
+    
+  
+  * `config` `[` <debug> `|` <json> `]`:
+    
+    <debug> dumps environment-based compiled config (`default`)
+
+    <json> dumps compiled config as JSON.
+    
+    To utilize this tool, `config/site.php` should be checked into
+    version control and should only include the following code:
+    
+        <?php
+        require DIR_BASE.'/packages/burrito/config.php';
+        
+  
+  * `sync` `[` <data> `|` <files>` | `<all> `]`:
+    Synchronize data and/or files with the production environment.
+    
+    <data> sync datatabase only
+    
+    <files> sync concrete5 files only
+    
+    <all> sync everything (`default`)
+    
+    
+## INSTALLATION
+
+It's recommended to install Burrito as a Git submodule.
+
+    $ git submodule add \
+    git://github.com/trivera/burrito.git packages/burrito
+    
+    $ git submodule init
+
+If your project is not using git, you can just download/extract the [zipball][zip] in your _packages_ directory.
+
+----
+
+After Burrito files are in place, It's **highly** recommended you
+install the Burrito CLI helper
+
+    $ packages/burrito/bin/burrito install cli
+    
+Now the full power of Burrito is at your fingertips!
+
+    $ burrito help
+
+[zip]: https://github.com/trivera/burrito/zipball/master
+
+
+
+## COPYRIGHT
+
+Burrito is copyright (C) 2012 Trivera Interactive
+
+## SEE ALSO
+<https://github.com/trivera/burrito>

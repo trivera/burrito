@@ -5,7 +5,7 @@ if (count($args) > 1) {
 	echo $tty->error('burrito-install expects a maximum of 1 argument');
 	exit;
 }
-elseif (count($args) < 1) {
+elseif (empty($args)) {
 	$args[] = 'all';
 }
 

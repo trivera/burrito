@@ -11,7 +11,7 @@ if (count($args) > 1) {
 	echo $tty->error('burrito-sync expects a maximum of 1 argument');
 	exit;
 }
-elseif (count($args) < 1) {
+elseif (empty($args)) {
 	$args[] = 'all';
 }
 

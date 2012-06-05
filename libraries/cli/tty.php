@@ -117,7 +117,15 @@ class Tty {
 	}
 	
 	public function ghost($s) {
-		return $this->out($this->color('Black'),$s);
+		return $this->out($this->color('Black'), $s);
+	}
+	
+	public function filename($s) {
+		return $this->out($this->bold('Cyan'), $s);
+	}
+	
+	public function syntax($s) {
+		return $this->out($this->bold('Black'), $s);
 	}
 	
 	public function printf() {
