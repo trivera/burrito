@@ -122,19 +122,21 @@ features to make doing your chores a lot easier; and fun!</p>
 
 <p>Here's what you get!</p>
 
-<dl>
-<dt><code>help</code> <code>[</code> <var>man</var> <code>|</code> <var>pretty</var> <code>]</code></dt><dd><p><var>man</var> display this man page (<code>default</code>)</p>
+<ul>
+<li><p><code>help</code> <code>[</code> <var>man</var> <code>|</code> <var>pretty</var> <code>]</code>:
+<var>man</var> display this man page (<code>default</code>)</p>
 
-<p><var>pretty</var> displays nicely-formatted help in your browser</p></dd>
-<dt><code>install</code> <code>[</code> <var>cli</var> <code>|</code> <var>config</var> <code>|</code> <var>all</var> <code>]</code></dt><dd><p><var>cli</var> installs the burrito command line interface helper to
+<p><var>pretty</var> displays nicely-formatted help in your browser</p></li>
+<li><p><code>install</code> <code>[</code> <var>cli</var> <code>|</code> <var>config</var> <code>|</code> <var>all</var> <code>]</code>:
+<var>cli</var> installs the burrito command line interface helper to
 <em>/usr/local/bin</em>. To update the helper, re-run this command.
 See also <a data-bare-link="true" title="INSTALLATION" href="#INSTALLATION">INSTALLATION</a></p>
 
 <p><var>config</var> installs burrito configuration templates to
 <em>config/burrito/</em></p>
 
-<p><var>all</var> installs everything (<code>default</code>)</p></dd>
-<dt><code>config</code> <code>[</code> <var>debug</var> <code>|</code> <var>json</var> <code>]</code>:</dt><dd><p></p>
+<p><var>all</var> installs everything (<code>default</code>)</p></li>
+<li><p><code>config</code> <code>[</code> <var>debug</var> <code>|</code> <var>json</var> <code>]</code>:</p>
 
 <p><var>debug</var> dumps environment-based compiled config (<code>default</code>)</p>
 
@@ -145,15 +147,19 @@ version control and should only include the following code:</p>
 
 <pre><code>&lt;?php
 require DIR_BASE.'/packages/burrito/config.php';
-</code></pre></dd>
-<dt><code>sync</code> <code>[</code> <var>data</var> <code>|</code> <var>files</var><code>|</code><var>all</var> <code>]</code></dt><dd><p>Synchronize data and/or files with the production environment.</p>
+</code></pre></li>
+<li><p><code>rebuild</code> <code>[</code> <var>man</var> <code>]</code></p>
+
+<p><var>man</var> rebuilds the man pages in using <a href="http://rtomayko.github.com/ronn/">ronn</a></p></li>
+<li><p><code>sync</code> <code>[</code> <var>data</var> <code>|</code> <var>files</var><code>|</code><var>all</var> <code>]</code>:
+Synchronize data and/or files with the production environment.</p>
 
 <p><var>data</var> sync datatabase only</p>
 
 <p><var>files</var> sync concrete5 files only</p>
 
-<p><var>all</var> sync everything (<code>default</code>)</p></dd>
-</dl>
+<p><var>all</var> sync everything (<code>default</code>)</p></li>
+</ul>
 
 
 <h2 id="INSTALLATION">INSTALLATION</h2>

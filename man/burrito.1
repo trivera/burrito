@@ -20,16 +20,14 @@ Burrito is a bundle of awesome for concrete5\. It contains many features to make
 .SH "COMMANDS"
 Here\'s what you get!
 .
-.TP
-\fBhelp\fR \fB[\fR \fIman\fR \fB|\fR \fIpretty\fR \fB]\fR
-\fIman\fR display this man page (\fBdefault\fR)
+.IP "\(bu" 4
+\fBhelp\fR \fB[\fR \fIman\fR \fB|\fR \fIpretty\fR \fB]\fR: \fIman\fR display this man page (\fBdefault\fR)
 .
 .IP
 \fIpretty\fR displays nicely\-formatted help in your browser
 .
-.TP
-\fBinstall\fR \fB[\fR \fIcli\fR \fB|\fR \fIconfig\fR \fB|\fR \fIall\fR \fB]\fR
-\fIcli\fR installs the burrito command line interface helper to \fI/usr/local/bin\fR\. To update the helper, re\-run this command\. See also \fIINSTALLATION\fR
+.IP "\(bu" 4
+\fBinstall\fR \fB[\fR \fIcli\fR \fB|\fR \fIconfig\fR \fB|\fR \fIall\fR \fB]\fR: \fIcli\fR installs the burrito command line interface helper to \fI/usr/local/bin\fR\. To update the helper, re\-run this command\. See also \fIINSTALLATION\fR
 .
 .IP
 \fIconfig\fR installs burrito configuration templates to \fIconfig/burrito/\fR
@@ -37,7 +35,7 @@ Here\'s what you get!
 .IP
 \fIall\fR installs everything (\fBdefault\fR)
 .
-.TP
+.IP "\(bu" 4
 \fBconfig\fR \fB[\fR \fIdebug\fR \fB|\fR \fIjson\fR \fB]\fR:
 .
 .IP
@@ -61,9 +59,14 @@ require DIR_BASE\.\'/packages/burrito/config\.php\';
 .IP "" 0
 
 .
-.TP
-\fBsync\fR \fB[\fR \fIdata\fR \fB|\fR \fIfiles\fR\fB|\fR\fIall\fR \fB]\fR
-Synchronize data and/or files with the production environment\.
+.IP "\(bu" 4
+\fBrebuild\fR \fB[\fR \fIman\fR \fB]\fR
+.
+.IP
+\fIman\fR rebuilds the man pages in using ronn \fIhttp://rtomayko\.github\.com/ronn/\fR
+.
+.IP "\(bu" 4
+\fBsync\fR \fB[\fR \fIdata\fR \fB|\fR \fIfiles\fR\fB|\fR\fIall\fR \fB]\fR: Synchronize data and/or files with the production environment\.
 .
 .IP
 \fIdata\fR sync datatabase only
@@ -73,6 +76,8 @@ Synchronize data and/or files with the production environment\.
 .
 .IP
 \fIall\fR sync everything (\fBdefault\fR)
+.
+.IP "" 0
 .
 .SH "INSTALLATION"
 It\'s recommended to install Burrito as a Git submodule\.
