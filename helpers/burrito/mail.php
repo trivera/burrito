@@ -9,13 +9,11 @@ class BurritoMailHelper {
 		// headers
 		$buh = Loader::helper('burrito/utility', 'burrito');
 		$buh->defaults(array(
+			'To' => ($to=$this->format_address($to)),
 			'From' => $this->format_address($from),
 			'Reply-To' => $this->format_address($from),
 			'Content-Type' => 'text/html',
 		), $headers);
-		
-		// to
-		$to = $this->format_address($to);
 		
 		// template
 		$template = DIR_FILES_EMAIL_TEMPLATES."/{$template}.html.php";
