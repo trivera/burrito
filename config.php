@@ -7,7 +7,7 @@
 
 
 // get defines
-$json = exec("php " . dirname(__FILE__) . "/bin/burrito config json");
+$json = exec(". " . dirname(__FILE__) . "/bin/burrito config json");
 
 // define
 foreach (json_decode($json) as $key => $value) {
