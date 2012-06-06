@@ -31,11 +31,17 @@ class BurritoMailHelper {
 		
 		// address as array
 		// array('name'=>'John Smith', 'address'=>'john.smith@example.com');
-		if (is_array($address)) {
+		if (is_array($address) && array_key_exists('address', $address)) {
 			return array_key_exists('name', $address) && !empty($address['name'])
 				? sprintf('"%s" <%s>', $address['name'], $address['address'])
 				: $address['address']
 			;
+		}
+		
+		// address as array, multiple recipients
+		// array('john.smith@example.com', array('name'=>'Bob Smith', 'address'=>'bob.smith@example.com'), 'foobar@example.com')
+		elseif (is_array($address)) {
+			return join(', ', array_map(array($this, 'format_address'), $address));
 		}
 		
 		// address as string
