@@ -9,10 +9,10 @@ do
 	
 		# terminal-based commands
 		# help
-		if [ $1 = "help" ]; then
+		if [ "$1" = "help" ]; then
 		
 			# html help
-			if [ $2 = "pretty" ]; then
+			if [ "$2" = "pretty" ]; then
 				open packages/burrito/man/burrito.1.html
 			else
 				man packages/burrito/man/burrito.1
