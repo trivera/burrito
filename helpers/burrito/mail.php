@@ -38,12 +38,6 @@ class BurritoMailHelper {
 			;
 		}
 		
-		// address as array, multiple recipients
-		// array('john.smith@example.com', array('name'=>'Bob Smith', 'address'=>'bob.smith@example.com'), 'foobar@example.com')
-		elseif (is_array($address)) {
-			return join(', ', array_map(array($this, 'format_address'), $address));
-		}
-		
 		// address as string
 		else {
 			return $address;
@@ -55,7 +49,9 @@ class BurritoMailHelper {
 		$_ = array();
 		
 		foreach($headers as $key => $value) {
-			$_[] = $key . ": " . $value;
+			if ( is_numeric($value) || ! empty($value)) {
+				$_[] = $key . ": " . $value;
+			}
 		}
 		
 		return implode("\r\n", $_);
