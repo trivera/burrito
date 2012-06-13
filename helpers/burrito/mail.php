@@ -94,7 +94,7 @@ class BurritoMailHelper {
 		
 		extract($this->_vars);
 		
-		if (file_exists($_=DIR_FILES_EMAIL_TEMPLATES."/{$template}.php")) {			
+		if (file_exists($_=DIR_FILES_EMAIL_TEMPLATES."/{$template}.php")) {
 			include($_);
 		}
 		else {
@@ -118,7 +118,7 @@ class BurritoMailHelper {
 		if (ENABLE_EMAILS) {
 			
 			// from
-			if (! $this->from) { 
+			if (! $this->from) {
 				$this->from = $this->defaultNoReply();
 			}
 			$this->_mail->setFrom($this->from);
