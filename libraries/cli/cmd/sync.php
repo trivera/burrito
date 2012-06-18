@@ -36,12 +36,14 @@ if (in_array($args[0], array('data', 'all'))) {
 	echo $tty->h1('Downloading remote database: '. BurritoConfig::get('production', 'db', 'name'));
 	
 	// system call
-	passthru(sprintf(
+	echo $tty->println($_=sprintf(
 		'ssh %s "mysqldump %s | gzip" > %s',
 		_ssh(BurritoConfig::env('sync', 'ssh')),
 		_mysql(BurritoConfig::get('production', 'db')),
 		($target=__C5__.$_.'/'.($f=time().'.sql.gz'))
-	), $status);
+	));
+	
+	passthru($_, $status);
 
 	// export failed
 	if ($status != 0){
@@ -65,11 +67,12 @@ if (in_array($args[0], array('data', 'all'))) {
 		}
 		
 		// system call
-		passthru(sprintf(
+		echo $tty->println($_=sprintf(
 			'gzip -dc %s | mysql %s',
 			$target,
 			_mysql(BurritoConfig::get('development', 'db'))
-		), $status);
+		));
+		passthru($_, $status);
 
 		// import failed
 		if ($status != 0){
@@ -90,9 +93,10 @@ if (in_array($args[0], array('data', 'all'))) {
 if (in_array($args[0], array('files', 'all'))) {
 	
 	echo $tty->h1('Syncing files');
+	echo $tty->println($_ = 'rsync  '._rsync(BurritoConfig::env('sync', 'files')));
 	
 	// system call
-	passthru('rsync  '._rsync(BurritoConfig::env('sync', 'files')), $status);
+	passthru($_, $status);
 	
 	// sync failed
 	if ($status == 23) {
