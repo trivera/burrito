@@ -63,7 +63,7 @@ class BurritoMailHelper {
 	}
 	
 	public function replyTo($address) {
-		$this->addHeader('Reply-To', $address);
+		$this->_mail->setReplyTo($address);
 	}
 	
 	public function set() {
