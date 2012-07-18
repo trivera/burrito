@@ -73,9 +73,12 @@ class BurritoModel extends ADOdb_Active_Record {
 	*/
 	public function setData($data) {
 		foreach ($data as $key => $value) {
-			if ($value == '') {
+			
+			// PHP thinks 0 == '', so this had to be updated
+			if (is_string($value) && empty($value)) {
 				$value = null;
 			}
+			
 			$this->{$key} = $value;
 		}
 	}
