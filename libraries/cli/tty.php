@@ -75,16 +75,16 @@ class Tty {
 
 	private function out() {
 		$args = func_get_args();
-		$out = '';
-		foreach ($args as $s) $out .= $s;
-		return $out.$this->reset();
+		$newline = $this->extract_newline($args);
+		return implode('', $args).$this->reset().$newline;
 	}
 	
 	public function h1($s) {
 		return $this->out(
 			$this->bold('Yellow'),
 			$this->bColor('Blue'),
-			" {$s} \n"
+			$s,
+			PHP_EOL
 		);
 	}
 
@@ -92,12 +92,13 @@ class Tty {
 		return $this->out(
 			$this->color('dBlack'), 
 			$this->bColor('Green'),
-			" {$s} \n"
+			$s,
+			PHP_EOL
 		);
 	}
 
 	public function error($s) {
-		return $this->out($this->bold('Red'), $s, "\n");
+		return $this->out($this->bold('Red'), $s, PHP_EOL);
 	}
 	
 	public function func($s) {
@@ -130,12 +131,20 @@ class Tty {
 	
 	public function printf() {
 		$args = func_get_args();
-		return $this->out(vsprintf(array_shift($args), $args));
+		$newline = $this->extract_newline($args);
+		return $this->out(vsprintf(array_shift($args), $args), $newline);
 	}
 	
 	public function println() {
 		$args = func_get_args();
-		return call_user_func_array(array($this, 'printf'), $args) . "\n";
+		$args[] = PHP_EOL;
+		return call_user_func_array(array($this, 'printf'), $args);
 	}
 	
+	private function extract_newline(&$args) {
+		return end($args) == PHP_EOL
+			? array_pop($args)
+			: null
+		;
+	}
 }
