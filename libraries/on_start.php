@@ -16,7 +16,7 @@ Loader::library('burrito/block_controller', 'burrito');
 
 
 // Replace the image feed background with a subtle texture
-define('WHITE_LABEL_DASHBOARD_BACKGROUND_SRC', '/packages/burrito/img/texture.png');
+define('WHITE_LABEL_DASHBOARD_BACKGROUND_SRC', DIR_REL.'/packages/burrito/img/texture.png');
 
 /* 
 	Debugging function
