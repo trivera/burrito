@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv='content-type' value='text/html;charset=utf8'>
+  <meta name='generator' value='Ronn/v0.7.3 (http://github.com/rtomayko/ronn/tree/0.7.3)'>
+  <title>burrito(1) - Burrito CLI</title>
+  <style type='text/css' media='all'>
+  /* style: man */
+  body#manpage {margin:0}
+  .mp {max-width:100ex;padding:0 9ex 1ex 4ex}
+  .mp p,.mp pre,.mp ul,.mp ol,.mp dl {margin:0 0 20px 0}
+  .mp h2 {margin:10px 0 0 0}
+  .mp > p,.mp > pre,.mp > ul,.mp > ol,.mp > dl {margin-left:8ex}
+  .mp h3 {margin:0 0 0 4ex}
+  .mp dt {margin:0;clear:left}
+  .mp dt.flush {float:left;width:8ex}
+  .mp dd {margin:0 0 0 9ex}
+  .mp h1,.mp h2,.mp h3,.mp h4 {clear:left}
+  .mp pre {margin-bottom:20px}
+  .mp pre+h2,.mp pre+h3 {margin-top:22px}
+  .mp h2+pre,.mp h3+pre {margin-top:5px}
+  .mp img {display:block;margin:auto}
+  .mp h1.man-title {display:none}
+  .mp,.mp code,.mp pre,.mp tt,.mp kbd,.mp samp,.mp h3,.mp h4 {font-family:monospace;font-size:14px;line-height:1.42857142857143}
+  .mp h2 {font-size:16px;line-height:1.25}
+  .mp h1 {font-size:20px;line-height:2}
+  .mp {text-align:justify;background:#fff}
+  .mp,.mp code,.mp pre,.mp pre code,.mp tt,.mp kbd,.mp samp {color:#131211}
+  .mp h1,.mp h2,.mp h3,.mp h4 {color:#030201}
+  .mp u {text-decoration:underline}
+  .mp code,.mp strong,.mp b {font-weight:bold;color:#131211}
+  .mp em,.mp var {font-style:italic;color:#232221;text-decoration:none}
+  .mp a,.mp a:link,.mp a:hover,.mp a code,.mp a pre,.mp a tt,.mp a kbd,.mp a samp {color:#0000ff}
+  .mp b.man-ref {font-weight:normal;color:#434241}
+  .mp pre {padding:0 4ex}
+  .mp pre code {font-weight:normal;color:#434241}
+  .mp h2+pre,h3+pre {padding-left:0}
+  ol.man-decor,ol.man-decor li {margin:3px 0 10px 0;padding:0;float:left;width:33%;list-style-type:none;text-transform:uppercase;color:#999;letter-spacing:1px}
+  ol.man-decor {width:100%}
+  ol.man-decor li.tl {text-align:left}
+  ol.man-decor li.tc {text-align:center;letter-spacing:4px}
+  ol.man-decor li.tr {text-align:right;float:right}
+  </style>
+  <style type='text/css' media='all'>
+  /* style: burrito */
+  body {margin:0}
+  #man,#man code,#man pre,#man tt,#man kbd,#man samp {font-family:consolas,monospace;font-size:16px;line-height:1.3;color:#343331;background:#fff}
+  #man {max-width:89ex;text-align:justify;margin:0 25px 25px 25px}
+  #man h1,#man h2,#man h3 {color:#232221;clear:left}
+  #man h1 {font-size:28px;margin:15px 0 30px 0;text-align:center}
+  #man h2 {font-size:18px;margin-bottom:0;margin-top:10px;line-height:1.3}
+  #man h3 {font-size:16px;margin:0 0 0 4ex}
+  #man p,#man ul,#man ol,#man dl,#man pre {margin:0 0 18px 0}
+  #man pre {color:#333231;background:#edeceb;padding:5px 7px;margin:0px 0 20px 0;border-left:2ex solid #ddd}
+  #man pre +h2,#man pre +h3 {margin-top:22px}
+  #man h2 +pre,#man h3 +pre {margin-top:5px}
+  #man > p,#man > ul,#man > ol,#man > dl,#man > pre {margin-left:8ex}
+  #man dt {margin:0;clear:left}
+  #man dt.flush {float:left;width:8ex}
+  #man dd {margin:0 0 0 9ex}
+  #man code,#man strong,#man b {font-weight:bold;color:#131211}
+  #man pre code {font-weight:normal;color:#232221;background:inherit}
+  #man em,var,u {font-style:normal;color:#333231;border-bottom:1px solid #999}
+  #man h1.man-title {display:none}
+  #man ol.man,#man ol.man li {margin:2px 0 10px 0;padding:0;float:left;width:33%;list-style-type:none;text-transform:uppercase;font-size:18px;color:#999;letter-spacing:1px}
+  #man ol.man {width:100%}
+  #man ol.man li.tl {text-align:left}
+  #man ol.man li.tc {text-align:center;letter-spacing:4px}
+  #man ol.man li.tr {text-align:right}
+  #man ol.man a {color:#999}
+  #man ol.man a:hover {color:#333231}
+  </style>
+  <style type='text/css' media='all'>
+  /* style: toc */
+  .man-navigation {display:block !important;position:fixed;top:0;left:113ex;height:100%;width:100%;padding:48px 0 0 0;border-left:1px solid #dbdbdb;background:#eee}
+  .man-navigation a,.man-navigation a:hover,.man-navigation a:link,.man-navigation a:visited {display:block;margin:0;padding:5px 2px 5px 30px;color:#999;text-decoration:none}
+  .man-navigation a:hover {color:#111;text-decoration:underline}
+  </style>
+</head>
+<!--
+  The following styles are deprecated and will be removed at some point:
+  div#man, div#man ol.man, div#man ol.head, div#man ol.man.
+
+  The .man-page, .man-decor, .man-head, .man-foot, .man-title, and
+  .man-navigation should be used instead.
+-->
+<body id='manpage'>
+  <div class='mp' id='man'>
+
+  <div class='man-navigation' style='display:none'>
+    <a href="#NAME">NAME</a>
+    <a href="#SYNOPSIS">SYNOPSIS</a>
+    <a href="#DESCRIPTION">DESCRIPTION</a>
+    <a href="#COMMANDS">COMMANDS</a>
+    <a href="#INSTALLATION">INSTALLATION</a>
+    <a href="#COPYRIGHT">COPYRIGHT</a>
+    <a href="#SEE-ALSO">SEE ALSO</a>
+  </div>
+
+  <ol class='man-decor man-head man head'>
+    <li class='tl'>burrito(1)</li>
+    <li class='tc'></li>
+    <li class='tr'>burrito(1)</li>
+  </ol>
+
+  <h2 id="NAME">NAME</h2>
+<p class="man-name">
+  <code>burrito</code> - <span class="man-whatis">Burrito CLI</span>
+</p>
+
+<h2 id="SYNOPSIS">SYNOPSIS</h2>
+
+<pre><code>burrito &lt;command> [&lt;arg>...]
+</code></pre>
+
+<h2 id="DESCRIPTION">DESCRIPTION</h2>
+
+<p>Burrito is a bundle of awesome for concrete5. It contains many
+features to make doing your chores a lot easier; and fun!</p>
+
+<h2 id="COMMANDS">COMMANDS</h2>
+
+<p>Here's what you get!</p>
+
+<ul>
+<li><p><code>help</code> [ <var>man</var> | <var>pretty</var> ]:</p>
+
+<p><var>man</var> display this man page (<code>default</code>)</p>
+
+<p><var>pretty</var> displays nicely-formatted help in your browser</p></li>
+<li><p><code>install</code> [ <var>cli</var> | <var>config</var> | <var>all</var> ]:
+<var>cli</var> installs the burrito command line interface helper to
+<em>/usr/local/bin</em>. To update the helper, re-run this command.
+See also <a href="#INSTALLATION" data-bare-link="true" title="INSTALLATION">INSTALLATION</a></p>
+
+<p><var>config</var> installs burrito configuration templates to
+<em>config/burrito/</em></p>
+
+<p><var>all</var> installs everything (<code>default</code>)</p></li>
+<li><p><code>config</code> [ <var>debug</var> | <var>json</var> ]:</p>
+
+<p><var>debug</var> dumps environment-based compiled config (<code>default</code>)</p>
+
+<p><var>json</var> dumps compiled config as JSON.</p>
+
+<p>To utilize this tool, <code>config/site.php</code> should be checked into
+version control and should only include the following code:</p>
+
+<pre><code>&lt;?php
+require DIR_BASE.'/packages/burrito/config.php';
+</code></pre></li>
+<li><p><code>rebuild</code> [ <var>man</var> ]</p>
+
+<p><var>man</var> rebuilds the man pages in using <a href="http://rtomayko.github.com/ronn/">ronn</a>. To update this
+man page, edit <em>packages/burrito/man/burrito.1.ron</em> and run this
+command.</p></li>
+<li><p><code>sync</code> [ <var>data</var> | <var>files</var> | <var>all</var> ]:
+Synchronize data and/or files with the production environment.</p>
+
+<p><var>data</var> sync datatabase only</p>
+
+<p><var>files</var> sync concrete5 files only</p>
+
+<p><var>all</var> sync everything (<code>default</code>)</p></li>
+</ul>
+
+
+<h2 id="INSTALLATION">INSTALLATION</h2>
+
+<p>It's recommended to install Burrito as a Git submodule.</p>
+
+<pre><code>$ git submodule add \
+git://github.com/trivera/burrito.git packages/burrito
+
+$ git submodule init
+</code></pre>
+
+<p>If your project is not using git, you can just download/extract the <a href="https://github.com/trivera/burrito/zipball/master">zipball</a> in your <em>packages</em> directory.</p>
+
+<hr />
+
+<p>After Burrito files are in place, It's <strong>highly</strong> recommended you
+install the Burrito CLI helper</p>
+
+<pre><code>$ packages/burrito/bin/burrito install cli
+</code></pre>
+
+<p>Now the full power of Burrito is at your fingertips!</p>
+
+<pre><code>$ burrito help
+</code></pre>
+
+<h2 id="COPYRIGHT">COPYRIGHT</h2>
+
+<p>Burrito is copyright (C) 2012 Trivera Interactive</p>
+
+<h2 id="SEE-ALSO">SEE ALSO</h2>
+
+<p><a href="https://github.com/trivera/burrito" data-bare-link="true">https://github.com/trivera/burrito</a></p>
+
+
+  <ol class='man-decor man-foot man foot'>
+    <li class='tl'></li>
+    <li class='tc'>August 2012</li>
+    <li class='tr'>burrito(1)</li>
+  </ol>
+
+  </div>
+</body>
+</html>
