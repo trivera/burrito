@@ -24,6 +24,7 @@ Here's what you get!
     
     
   * `install` [ <cli> | <config> | <all> ]:
+    
     <cli> installs the burrito command line interface helper to
     _/usr/local/bin_. To update the helper, re-run this command.
     See also [INSTALLATION][]
