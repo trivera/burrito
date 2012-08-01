@@ -1,7 +1,7 @@
 .\" generated with Ronn/v0.7.3
 .\" http://github.com/rtomayko/ronn/tree/0.7.3
 .
-.TH "BURRITO" "1" "June 2012" "" ""
+.TH "BURRITO" "1" "August 2012" "" ""
 .
 .SH "NAME"
 \fBburrito\fR \- Burrito CLI
@@ -21,13 +21,16 @@ Burrito is a bundle of awesome for concrete5\. It contains many features to make
 Here\'s what you get!
 .
 .IP "\(bu" 4
-\fBhelp\fR \fB[\fR \fIman\fR \fB|\fR \fIpretty\fR \fB]\fR: \fIman\fR display this man page (\fBdefault\fR)
+\fBhelp\fR [ \fIman\fR | \fIpretty\fR ]:
+.
+.IP
+\fIman\fR display this man page (\fBdefault\fR)
 .
 .IP
 \fIpretty\fR displays nicely\-formatted help in your browser
 .
 .IP "\(bu" 4
-\fBinstall\fR \fB[\fR \fIcli\fR \fB|\fR \fIconfig\fR \fB|\fR \fIall\fR \fB]\fR: \fIcli\fR installs the burrito command line interface helper to \fI/usr/local/bin\fR\. To update the helper, re\-run this command\. See also \fIINSTALLATION\fR
+\fBinstall\fR [ \fIcli\fR | \fIconfig\fR | \fIall\fR ]: \fIcli\fR installs the burrito command line interface helper to \fI/usr/local/bin\fR\. To update the helper, re\-run this command\. See also \fIINSTALLATION\fR
 .
 .IP
 \fIconfig\fR installs burrito configuration templates to \fIconfig/burrito/\fR
@@ -36,7 +39,7 @@ Here\'s what you get!
 \fIall\fR installs everything (\fBdefault\fR)
 .
 .IP "\(bu" 4
-\fBconfig\fR \fB[\fR \fIdebug\fR \fB|\fR \fIjson\fR \fB]\fR:
+\fBconfig\fR [ \fIdebug\fR | \fIjson\fR ]:
 .
 .IP
 \fIdebug\fR dumps environment\-based compiled config (\fBdefault\fR)
@@ -60,13 +63,13 @@ require DIR_BASE\.\'/packages/burrito/config\.php\';
 
 .
 .IP "\(bu" 4
-\fBrebuild\fR \fB[\fR \fIman\fR \fB]\fR
+\fBrebuild\fR [ \fIman\fR ]
 .
 .IP
-\fIman\fR rebuilds the man pages in using ronn \fIhttp://rtomayko\.github\.com/ronn/\fR
+\fIman\fR rebuilds the man pages in using ronn \fIhttp://rtomayko\.github\.com/ronn/\fR\. To update this man page, edit \fIpackages/burrito/man/burrito\.1\.ron\fR and run this command\.
 .
 .IP "\(bu" 4
-\fBsync\fR \fB[\fR \fIdata\fR \fB|\fR \fIfiles\fR\fB|\fR\fIall\fR \fB]\fR: Synchronize data and/or files with the production environment\.
+\fBsync\fR [ \fIdata\fR | \fIfiles\fR | \fIall\fR ]: Synchronize data and/or files with the production environment\.
 .
 .IP
 \fIdata\fR sync datatabase only

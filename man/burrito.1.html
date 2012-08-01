@@ -123,20 +123,21 @@ features to make doing your chores a lot easier; and fun!</p>
 <p>Here's what you get!</p>
 
 <ul>
-<li><p><code>help</code> <code>[</code> <var>man</var> <code>|</code> <var>pretty</var> <code>]</code>:
-<var>man</var> display this man page (<code>default</code>)</p>
+<li><p><code>help</code> [ <var>man</var> | <var>pretty</var> ]:</p>
+
+<p><var>man</var> display this man page (<code>default</code>)</p>
 
 <p><var>pretty</var> displays nicely-formatted help in your browser</p></li>
-<li><p><code>install</code> <code>[</code> <var>cli</var> <code>|</code> <var>config</var> <code>|</code> <var>all</var> <code>]</code>:
+<li><p><code>install</code> [ <var>cli</var> | <var>config</var> | <var>all</var> ]:
 <var>cli</var> installs the burrito command line interface helper to
 <em>/usr/local/bin</em>. To update the helper, re-run this command.
-See also <a data-bare-link="true" title="INSTALLATION" href="#INSTALLATION">INSTALLATION</a></p>
+See also <a href="#INSTALLATION" data-bare-link="true" title="INSTALLATION">INSTALLATION</a></p>
 
 <p><var>config</var> installs burrito configuration templates to
 <em>config/burrito/</em></p>
 
 <p><var>all</var> installs everything (<code>default</code>)</p></li>
-<li><p><code>config</code> <code>[</code> <var>debug</var> <code>|</code> <var>json</var> <code>]</code>:</p>
+<li><p><code>config</code> [ <var>debug</var> | <var>json</var> ]:</p>
 
 <p><var>debug</var> dumps environment-based compiled config (<code>default</code>)</p>
 
@@ -148,10 +149,12 @@ version control and should only include the following code:</p>
 <pre><code>&lt;?php
 require DIR_BASE.'/packages/burrito/config.php';
 </code></pre></li>
-<li><p><code>rebuild</code> <code>[</code> <var>man</var> <code>]</code></p>
+<li><p><code>rebuild</code> [ <var>man</var> ]</p>
 
-<p><var>man</var> rebuilds the man pages in using <a href="http://rtomayko.github.com/ronn/">ronn</a></p></li>
-<li><p><code>sync</code> <code>[</code> <var>data</var> <code>|</code> <var>files</var><code>|</code><var>all</var> <code>]</code>:
+<p><var>man</var> rebuilds the man pages in using <a href="http://rtomayko.github.com/ronn/">ronn</a>. To update this
+man page, edit <em>packages/burrito/man/burrito.1.ron</em> and run this
+command.</p></li>
+<li><p><code>sync</code> [ <var>data</var> | <var>files</var> | <var>all</var> ]:
 Synchronize data and/or files with the production environment.</p>
 
 <p><var>data</var> sync datatabase only</p>
@@ -193,12 +196,12 @@ install the Burrito CLI helper</p>
 
 <h2 id="SEE-ALSO">SEE ALSO</h2>
 
-<p><a data-bare-link="true" href="https://github.com/trivera/burrito">https://github.com/trivera/burrito</a></p>
+<p><a href="https://github.com/trivera/burrito" data-bare-link="true">https://github.com/trivera/burrito</a></p>
 
 
   <ol class='man-decor man-foot man foot'>
     <li class='tl'></li>
-    <li class='tc'>June 2012</li>
+    <li class='tc'>August 2012</li>
     <li class='tr'>burrito(1)</li>
   </ol>
 

@@ -18,7 +18,10 @@ if (in_array($args[0], array('man'))) {
 	}
 	else {
 		echo $tty->success("rebuilding man pages");
-		passthru("export RONN_STYLE=" . __BURRITO__ . "/man/css");
-		passthru("ronn --style=burrito,toc " . __BURRITO__ . "/man/burrito.1.ron");
+		# this line stopped working for whatever reason
+		# passthru("export RONN_STYLE=" . __BURRITO__ . "/man/css");
+		# passing absolute path of burrito css to ronn
+		$burrito_css = __BURRITO__ . "/man/css/burrito.css";
+		passthru("ronn --style={$burrito_css},toc " . __BURRITO__ . "/man/burrito.1.ron");
 	}
 }

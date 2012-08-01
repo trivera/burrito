@@ -16,13 +16,14 @@ features to make doing your chores a lot easier; and fun!
 
 Here's what you get!
 
-  * `help` `[` <man> `|` <pretty> `]`:
+  * `help` [ <man> | <pretty> ]:
+    
     <man> display this man page (`default`)
     
     <pretty> displays nicely-formatted help in your browser
     
     
-  * `install` `[` <cli> `|` <config> `|` <all> `]`:
+  * `install` [ <cli> | <config> | <all> ]:
     <cli> installs the burrito command line interface helper to
     _/usr/local/bin_. To update the helper, re-run this command.
     See also [INSTALLATION][]
@@ -33,7 +34,7 @@ Here's what you get!
     <all> installs everything (`default`)
     
   
-  * `config` `[` <debug> `|` <json> `]`:
+  * `config` [ <debug> | <json> ]:
     
     <debug> dumps environment-based compiled config (`default`)
 
@@ -45,11 +46,13 @@ Here's what you get!
         <?php
         require DIR_BASE.'/packages/burrito/config.php';
   
-  * `rebuild` `[` <man> `]`
+  * `rebuild` [ <man> ]
     
-    <man> rebuilds the man pages in using [ronn][ronn]
+    <man> rebuilds the man pages in using [ronn][ronn]. To update this
+    man page, edit _packages/burrito/man/burrito.1.ron_ and run this
+    command.
     
-  * `sync` `[` <data> `|` <files>` | `<all> `]`:
+  * `sync` [ <data> | <files> | <all> ]:
     Synchronize data and/or files with the production environment.
     
     <data> sync datatabase only
