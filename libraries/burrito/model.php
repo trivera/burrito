@@ -92,7 +92,7 @@ class BurritoModel extends ADOdb_Active_Record {
 	public function save($data = null) {
 		
 		// after a record is saved, an ID is set
-		// this flag is used to trigger the appropriate 
+		// this flag is used to trigger the appropriate
 		// create OR update callback
 		$this->magic('action', $this->id ? 'update' : 'create');
 
@@ -175,7 +175,7 @@ class BurritoModel extends ADOdb_Active_Record {
 	}
 	
 	/**
-	 *  this is used to accompany some of the magic 
+	 *  this is used to accompany some of the magic
 	 *  field and callbacks
 	 */
 	private $__magic = array();

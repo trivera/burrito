@@ -2,11 +2,16 @@
 
 class Url {
 	
-	private $components = array();
+	private $components = array('query'=>null);
 	
 	public function __construct($url=null) {
 		if ($url) {
-			$this->components = parse_url($url);
+			
+			$this->components = array_merge(
+				$this->components,
+				parse_url($url)
+			);
+			
 			$this->parseQuery();
 		}
 	}
@@ -22,10 +27,19 @@ class Url {
 	// $url->host			returns 'example.com'
 	// $url->path			returns '/path'
 	public function __get($key) {
-		return array_key_exists($key, $this->components)
-			? $this->components[$key]
-			: null
-		;
+		
+		if (array_key_exists($key, $this->components)) {
+			return $key == 'query'
+				
+				// special key; build query string
+				? http_build_query($this->components[$key])
+				
+				// normal key
+				: $this->components[$key]
+			;
+		}
+		
+		else return null;
 	}
 	
 	// get/set query params
@@ -44,8 +58,8 @@ class Url {
 		
 		// get
 		else {
-			return array_key_exists($key, (array)$this->query)
-				? $this->query[$key]
+			return array_key_exists($key, $this->components['query'])
+				? $this->components['query'][$key]
 				: null
 			;
 		}
@@ -60,15 +74,13 @@ class Url {
 			$this->host .
 			$this->port() .
 			$this->path .
-			$this->queryString() .
+			$this->query .
 			$this->anchor()
 		;
 	}
 	
 	private function parseQuery() {
-		if (isset($this->components['query'])) {
-			parse_str($this->components['query'], $this->components['query']);
-		}
+		parse_str($this->components['query'], $this->components['query']);
 	}
 	
 	private function scheme() {
@@ -89,10 +101,7 @@ class Url {
 	}
 	
 	private function queryString() {
-		return is_array($this->query) && count($this->query)
-			? "?".http_build_query($this->query)
-			: null
-		;
+		return $_=$this->query ? "?{$_}" : null;
 	}
 	
 	private function anchor() {
