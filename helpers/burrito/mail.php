@@ -2,6 +2,35 @@
 
 defined('C5_EXECUTE') or die("Access Denied.");
 
+/**
+ * BurritoMailHelper
+ * 
+ * 	// load helper to instance
+ * 	$bmh = Loader::helper('burrito/mail', 'burrito');
+ * 
+ *  // bulk set params via BurritoConfig
+ * 	// following BurritoConfig loads my_mail key-value pairs
+ * 	// from /config/burrito/my_module.ini
+ *  $bmh->init(BurritoConfig::env('my_module', 'my_mail'));
+ * 
+ * 	// manually set other params
+ *  $bmh->to($this->email);
+ * 
+ * 	// set template variables for mail view
+ *  $bmh->set(array(
+ *  	'app' => $this,
+ *  	'url'=> BurritoConfig::env('x_selector', 'download_url'),
+ *  ));
+ * 
+ * 	// load mail view (must be called after set)
+ * 	// following call loads /mail/my_module/application_approved.php
+ *  $bmh->load('my_module/application_approved');
+ * 
+ * 	// send!
+ *  $bmh->send();
+ *
+ * @package burrito
+ */
 class BurritoMailHelper {
 	
 	private $_data = array();
