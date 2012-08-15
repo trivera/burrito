@@ -74,7 +74,7 @@ class Url {
 			$this->host .
 			$this->port() .
 			$this->path .
-			$this->query .
+			$this->queryString() .
 			$this->anchor()
 		;
 	}
