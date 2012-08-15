@@ -6,8 +6,7 @@ defined('C5_EXECUTE') or die("Access Denied.");
  * BurritoMailHelper
  * 
  * 	// load helper to instance
- * 	Loader::helper('burrito/mail', 'burrito');
- * 	$bmh = new BurritoMailHelper();
+ * 	$bmh = Loader::helper('burrito/mail', 'burrito');
  * 
  *  // bulk set params via BurritoConfig
  * 	// following BurritoConfig loads my_mail key-value pairs
@@ -39,8 +38,14 @@ class BurritoMailHelper {
 	private $_transport;
 	private $_vars = array();
 	private $_headers = array();
-		
-	public function __construct() {
+	
+	/**
+	 * use concrete5 reset() method that is
+	 * automatically called by Loader::helper
+	 * 
+	 * DO NOT USE __construct()
+	 */
+	public function reset() {
 		
 		// tap concrete5's Zend mailer object
 		$_ = MailHelper::getMailerObject();
@@ -52,6 +57,11 @@ class BurritoMailHelper {
 		if (isset($_['transport'])) {
 			$this->_transport = $_['transport'];
 		}
+		
+		// reset remaining instance vars
+		$this->_data = array();
+		$this->_vars = array();
+		$this->_headers = array();
 	}
 	
 	public function __set($key, $value) {
