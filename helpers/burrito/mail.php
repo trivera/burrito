@@ -6,7 +6,8 @@ defined('C5_EXECUTE') or die("Access Denied.");
  * BurritoMailHelper
  * 
  * 	// load helper to instance
- * 	$bmh = Loader::helper('burrito/mail', 'burrito');
+ * 	Loader::helper('burrito/mail', 'burrito');
+ * 	$bmh = new BurritoMailHelper();
  * 
  *  // bulk set params via BurritoConfig
  * 	// following BurritoConfig loads my_mail key-value pairs
