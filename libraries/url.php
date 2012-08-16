@@ -101,7 +101,7 @@ class Url {
 	}
 	
 	private function queryString() {
-		return $this->query ? "?{$this->query}" : null;
+		return ($_=$this->query) ? "?{$_}" : null;
 	}
 	
 	private function anchor() {
