@@ -64,8 +64,8 @@ class BurritoModel extends ADOdb_Active_Record {
 	/*
 		Returns an array of all objects in this table.
 	*/
-	public function all() {
-		return $this->find('1=1');
+	public function all($appendSql=null) {
+		return $this->find("1=1 {$appendSql}");
 	}
 	
 	
