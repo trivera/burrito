@@ -92,6 +92,21 @@ class FieldHelper {
 				// insert schedulr widget
 				Loader::element('schedule', array('key' => $key, 'field' => $field, 'data' => $data));
 				break;
+			case 'group':
+				$db = Loader::db();
+				
+				$sql = 'select * from Groups where gID > 3 order by gName asc';
+				$r = $db->getAll($sql);
+				$opts = array(null => 'Select a group...');
+				
+				foreach ($r as $row) {
+					$opts[$row['gID']] = $row['gName'];
+				}
+				
+				$html = $form->select($key, $opts, $value);
+				break;
+			case 'user':
+				break;
 		}
 		return $html;
 	}
