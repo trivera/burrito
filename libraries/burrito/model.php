@@ -75,8 +75,9 @@ class BurritoModel extends ADOdb_Active_Record {
 	public function setData($data) {
 		foreach ($data as $key => $value) {
 			
-			// PHP thinks 0 == '', so this had to be updated
-			if (is_string($value) && empty($value)) {
+			// PHP thinks 0 == '', so this had to be updated to ===
+			// empty strings are the only values to be coerced into NULL
+			if ($value === '') {
 				$value = null;
 			}
 			
