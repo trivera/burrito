@@ -33,8 +33,7 @@
 											echo $fh->output($key, $field, $data);
 											if ($field['multi']) {
 												Loader::packageElement('multi', 'burrito', array('key' => $key, 'field' => $field, 'data' => $data));
-											}	
-
+											}
 										?>
 									</td>
 								</tr>
