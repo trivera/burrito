@@ -45,10 +45,10 @@
 <input type="hidden" id="mode" name="mode" value="single">
 <?php
 	$html = Loader::helper('html');
-	echo $html->javascript('tabs.js');
-	echo $html->javascript('json2.js');
-	echo $html->javascript('schedulr.js');
-	echo $html->css('schedulr.css');
+	echo $html->javascript('tabs.js', 'burrito');
+	echo $html->javascript('json2.js', 'burrito');
+	echo $html->javascript('schedulr.js', 'burrito');
+	echo $html->css('schedulr.css', 'burrito');
 ?>
 <script type="text/javascript" charset="utf-8">
 	$('.tabs').tabs();

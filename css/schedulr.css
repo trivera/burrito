@@ -1,0 +1,77 @@
+.schedulr{
+	font-family: "Helvetica", "Arial", sans-serif;
+	padding: 0;
+	color: #000;
+}
+.schedulr a{
+	color: #2A8FB8;	
+}
+.picker{
+	display: none; /* this is for the jquery slide effect */
+	margin: 5px auto;
+}
+div.title{
+	color: #2A8FB8;
+	font-weight: bold;
+}
+.picker div.day{
+	display: inline-block;
+	background: #ccc;
+	padding: 5px 0px;
+	margin: 0px;
+	cursor: pointer;
+	-webkit-transition: background, .3s;
+	min-width: 30px;
+	text-align: center;
+	color: #000;
+}
+.picker div.day:hover{
+	background: #eee;
+}
+.picker div.controls{
+	display: inline-block;
+	margin-left: 4px;
+	font-size: 13px;
+}
+.picker div.controls a{
+	color: #2A8FB8;
+	font-size: 14px;
+	font-weight: bold;
+	text-decoration: none;
+}
+.picker div.selected, .picker div.selected:hover{
+	background: #2A8FB8;
+	color: #fff;
+}
+.picker div.inactive{
+	color: #666;
+}
+div.schedulr-buttons{
+	display: inline-block;
+	margin: 5px 5px 5px 0px;
+}
+div.schedulr-buttons a{
+	padding: 4px;
+	border: 1px solid #212121;
+	background: #2A8FB8;
+	color: #fff;
+	text-decoration: none;
+	-webkit-border-radius: 5px;
+	-moz-border-radius: 5px;
+	border-radius: 5px;
+	font-size: 12px;
+	font-weight: bold;
+	-webkit-transition: all 1s;
+}
+.schedulr-input{
+	display: inline-block;
+	padding-right: 13px;
+}
+.schedulr-input span{
+	font-family: "Helvetica", "Arial", sans-serif;
+	width: 40px;
+	display: inline-block;
+}
+.disabled{
+	opacity: .4;
+}
