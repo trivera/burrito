@@ -1,5 +1,4 @@
 <?php 
-
 defined('C5_EXECUTE') or die("Access Denied.");
 
 class BurritoModel extends ADOdb_Active_Record {
@@ -21,6 +20,47 @@ class BurritoModel extends ADOdb_Active_Record {
 	}
 	
 	/* 
+		This is a function to return either all of the data for the fields on this model
+		or just a single value for a field. Handy for getting data for "multi" fields.
+	*/
+	public function getData($key = null) {
+		$idKey = $this->getIdKey();
+		$fields = $this->getFields();
+		
+		if ($key) {
+			// Return a single value
+			$field = $fields[$key]; // load the field options
+			
+			if ($key == 'id') {
+				return $this->id;
+			}
+			elseif (!$field['multi']) {
+				return $this->{$key};
+			}
+			else {
+				// Return an array of all of the related values
+				$model = BModel::get($field['relation_model']);
+				return $model->find($field['foreign_key'].' = ?', $this->{$idKey});
+			}
+		}
+		else {
+			// return everything
+			$data = array(
+				$idKey => $this->{$idKey}
+			);
+			foreach ($fields as $key => $field) {
+				$data[$key] = $this->getData($key);
+			}
+			return $data;
+		}
+	}
+	
+	/* Supports ID columns not called "id" */
+	public function getIdKey() {
+		return ($this->customIdKey) ? $this->customIdKey : 'id';
+	}
+	
+	/* 
 		Skip all of the Loader::model BS and just get a class
 	*/
 	public static function get($handle, $id = null, $idKey = 'id') {
@@ -38,7 +78,7 @@ class BurritoModel extends ADOdb_Active_Record {
 	/*
 	   Skip all of the Loader::model BS and just saturate a class with pre-fetched data
 	*/
-	static public function factory($handle, $data=null){
+	static public function factory($handle, $data = null){
 	    $th = Loader::helper('text');
 	    $className = $th->camelcase($handle);
 	    
@@ -127,7 +167,9 @@ class BurritoModel extends ADOdb_Active_Record {
 		return $items;
 	}
 	
-	/*	*/
+	/*	
+		This will travel through the sitemap to figure out what record to load given a page ID.
+	*/
 	static public function getObjectFromPage($objectHandle, $pageId=null, $pageColumn="page_id") {
 		
 		if (is_null($pageId)) {
@@ -158,5 +200,3 @@ class BurritoModel extends ADOdb_Active_Record {
 if (!class_exists('BModel') && function_exists('class_alias')) {
 	class_alias('BurritoModel', 'BModel');
 }
-
-?>
