@@ -8,12 +8,12 @@ BurritoConfig::loadConfig();
 
 // helpers
 Loader::helper('flash', 'burrito');
+Loader::helper('access', 'burrito');
 
 // libraries
 Loader::library('burrito/model', 'burrito');
 Loader::library('burrito/controller', 'burrito');
 Loader::library('burrito/block_controller', 'burrito');
-
 
 // Replace the image feed background with a subtle texture
 define('WHITE_LABEL_DASHBOARD_BACKGROUND_SRC', DIR_REL.'/packages/burrito/img/texture.png');
