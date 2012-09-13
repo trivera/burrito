@@ -29,12 +29,9 @@
 										<?php endif; ?>
 									</td>
 									<td>
-										<?php
-											echo $fh->output($key, $field, $data);
-											if ($field['multi']) {
-												Loader::packageElement('multi', 'burrito', array('key' => $key, 'field' => $field, 'data' => $data));
-											}
-										?>
+										<div id="<?php echo $key ?>-fieldContainer" class="field-container">
+											<?php $fh->output($key, $field, $data, true); ?>
+										</div>
 									</td>
 								</tr>
 							<?php endif; ?>

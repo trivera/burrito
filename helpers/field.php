@@ -8,24 +8,45 @@ defined('C5_EXECUTE') or die('Access Denied.');
 
 class FieldHelper {
 
-	public function output($key, $field, $data = array()) {	
-		if ($field['multi'] && !empty($data[$key])) {
+	public function output($key, $field, $data = array(), $autoEcho = false) {	
+		$baseKey = $key; // store the original key since it can get modified below
+		$editMode = (!empty($data[$key]));
+		
+		if ($editMode && $field['multi'] && !$this->isFileField($field)) {
 			$html = '';
 			foreach ($data[$key] as $value) {
 				$html .= '<div class="multi-clone">';
 				$html .= $this->generateHtml($key.'[]', $field, $value);
 				$html .= '</div>';
 			}
-			return $html;
 		}
-		else {
+		elseif (!($field['multi'] && $this->isFileField($field) && $editMode)) {
+			// Weird condition here but basically we don't want to generate HTML for multi-file type fields when in edit mode
 			$value = $data[$key];
-			$key = ($field['multi']) ? $key.'[]' : $key;
-			return $this->generateHtml($key, $field, $value, $data);
+			$key = ($field['multi'] && !$this->isFileField($field)) ? $key.'[]' : $key;
+			$html = $this->generateHtml($key, $field, $value, $data);
 		}
+		
+		// autoEcho preserves backwards compatibility with older (likely moldy) burritos that do not auto-echo
+		if ($autoEcho) {
+			echo $html;
+			if ($field['multi']) {
+				$element = ($this->isFileField($field)) ? 'multi_file' : 'multi';
+				Loader::packageElement($element, 'burrito', array('key' => $baseKey, 'field' => $field, 'data' => $data));
+			}
+		}
+		
+		return $html;
 	}
 	
-	private function generateHtml($key, $field, $value = null, $data = array()) {
+	/* Is this field a special C5 Asset Library widget? */
+	public function isFileField($field) {
+		$fileFields = array('file', 'image');
+		return in_array($field['type'], $fileFields);
+	}
+	
+	/* Generates the actual HTML used to display a field in a model */
+	public function generateHtml($key, $field, $value = null, $data = array()) {
 		$form = Loader::helper('form');
 		$dtt = Loader::helper('form/date_time');
 		$al = Loader::helper('concrete/asset_library');
@@ -67,30 +88,30 @@ class FieldHelper {
 				';
 				break;
 			case 'page':
-				Loader::element('page_options', array('key' => $key, 'data' => $data));
+				Loader::packageElement('page_options', 'burrito', array('key' => $key, 'data' => $data));
 				break;
 			case 'wysiwyg':
 				Loader::element('editor_controls');
 				$html = $form->textarea($key, $value, array('style' => 'width:100%;', 'class' => 'ccm-advanced-editor'));
 				break;
 			case 'checkbox_list':
-				$html = $this->buildCheckboxList($field['items'], 'tags', $data);
+				$html = $this->buildCheckboxList($field['items'], $key, $data);
 				break;
 			case 'image':
-				if (isset($value)) {
+				// d($value);
+				if (isset($value) && $value) {
 					$file = File::getByID($value);
 				}
 				$html = $al->image($key, $key, 'Choose image...', $file);
 				break;
 			case 'file':
-				if (isset($value)) {
+				if (isset($value) && $value) {
 					$file = File::getByID($value);
 				}
 				$html = $al->file($key, $key, 'Choose file...', $file);
 				break;
 			case 'schedule':
-				// insert schedulr widget
-				Loader::element('schedule', array('key' => $key, 'field' => $field, 'data' => $data));
+				Loader::packageElement('schedule', 'burrito', array('key' => $key, 'field' => $field, 'data' => $data));
 				break;
 			case 'group':
 				$db = Loader::db();
@@ -108,6 +129,7 @@ class FieldHelper {
 			case 'user':
 				break;
 		}
+		
 		return $html;
 	}
 	
