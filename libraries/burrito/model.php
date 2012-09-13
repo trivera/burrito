@@ -3,8 +3,9 @@ defined('C5_EXECUTE') or die("Access Denied.");
 
 class BurritoModel extends ADOdb_Active_Record {
 	
+	// override constructor
 	public function __construct($data=null) {
-	 	$db = Loader::db();
+	 	$db = Loader::db(); # THIS LINE IS REQUIRED
 	 	parent::__construct();
 	
 		if (is_array($data)) {
@@ -103,8 +104,8 @@ class BurritoModel extends ADOdb_Active_Record {
 	/*
 		Returns an array of all objects in this table.
 	*/
-	public function all() {
-		return $this->find('1=1');
+	public function all($appendSql=null) {
+		return $this->find("1=1 {$appendSql}");
 	}
 	
 	
@@ -114,8 +115,9 @@ class BurritoModel extends ADOdb_Active_Record {
 	public function setData($data) {
 		foreach ($data as $key => $value) {
 			
-			// PHP thinks 0 == '', so this had to be updated
-			if (is_string($value) && empty($value)) {
+			// PHP thinks 0 == '', so this had to be updated to ===
+			// empty strings are the only values to be coerced into NULL
+			if ($value === '') {
 				$value = null;
 			}
 			
@@ -129,11 +131,31 @@ class BurritoModel extends ADOdb_Active_Record {
 	*/
 	
 	public function save($data = null) {
+		
+		// after a record is saved, an ID is set
+		// this flag is used to trigger the appropriate
+		// create OR update callback
+		$this->magic('action', $this->id ? 'update' : 'create');
+
+		// pre callbacks
+		$this->__callbacks('before');
+		
+		// set data helper
 		if ($data != null) {
 			$this->setData($data);
 		}
+		
+		// magic fields
+		$this->applyMagic();
+		
+		// parent op
 		parent::replace();
+		
+		// post callbacks
+		$this->__callbacks('after');
 	}
+	
+	
 	
 	
 	public function getFile($field) {
@@ -155,11 +177,10 @@ class BurritoModel extends ADOdb_Active_Record {
 		Generates & returns a key => value array suitable for using in C5's 
 		form helper select input function.
 	*/
-	
 	public function getSelectOptions($idKey = 'id', $displayKey = 'name', $blankText = null) {
 		$items = array();
 		if ($blankText) {
-			$items['NULL'] = $blankText;
+			$items[''] = $blankText;
 		}
 		foreach ($this->find('1=1 ORDER BY '.$displayKey.' ASC') as $item) {
 			$items[$item->$idKey] = $item->$displayKey;
@@ -194,7 +215,82 @@ class BurritoModel extends ADOdb_Active_Record {
 				return false;
 			}
 		}
-	}	
+	}
+	
+	/**
+	 *  this is used to accompany some of the magic
+	 *  field and callbacks
+	 */
+	private $__magic = array();
+	
+	/**
+	 * magic getter/setter
+	 */
+	private function magic($key, $value=null) {
+		
+		// get
+		if (is_null($value)) {
+			return array_key_exists($key, $this->__magic)
+				? $this->__magic[$key]
+				: null
+			;
+		}
+		
+		// set
+		else {
+			return $this->__magic[$key] = $value;
+		}
+	}
+	
+	
+	/**
+	 *  this function allows you to declare callbacks that
+	 *  automatically perform tasks on fields
+	 * 
+	 * 	example:
+	 *  protected function __magic_created_at() {...}
+	 *  
+	 *  in this example, if your model has a `created_at` field,
+	 * 	this method will be called
+	 */
+	private function applyMagic() {
+		foreach (get_class_methods($this) as $method) {
+			if (preg_match('/^__magic_(\w+)$/', $method, $_) !== false) {
+				if (property_exists($this, $_[1])) {
+					call_user_func(array($this, $method));
+				}
+			}
+		}
+	}
+	
+	// auto set datetime if created_at field exists
+	protected function __magic_created_at() {
+		if (empty($this->created_at)) {
+			$this->created_at = date('Y-m-d h:i:s');
+		}
+	}
+	
+	// timestamp if updated_at field exists
+	protected function __magic_updated_at() {
+		$this->updated_at = date('Y-m-d h:i:s');
+	}
+	
+	private function __callbacks($prefix) {
+		
+		$th = Loader::helper('text');
+		
+		$callbacks = array(
+			'create' 	=> $this->magic('action')=='create',
+			'update' 	=> $this->magic('action')=='update',
+			'save'		=> true
+		);
+		
+		foreach ($callbacks as $event => $trigger) {
+			if (method_exists($this, $fn=$prefix.$th->camelcase($event)) && $trigger) {
+				call_user_func(array($this, $fn));
+			}
+		}
+	}
 }
 
 if (!class_exists('BModel') && function_exists('class_alias')) {

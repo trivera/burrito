@@ -9,7 +9,7 @@ if (empty($args)) {
 // man
 if (in_array($args[0], array('man'))) {
 	
-	exec("type -P ronn > /dev/null", $output, $ret);
+	exec("hash ronn 2>/dev/null", $output, $ret);
 	
 	if ( $ret != 0) {
 		echo $tty->error('man page rebuild require ronn gem');

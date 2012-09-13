@@ -60,7 +60,7 @@ if (in_array($args[0], array('data', 'all'))) {
 		echo $tty->h1('Importing local database: '.BurritoConfig::get('development', 'db', 'name'));
 		
 		// check for mysql
-		passthru('type -P mysql > /dev/null', $status);
+		passthru('hash mysql 2>/dev/null', $status);
 		if ($status != 0) {
 			echo $tty->error('no access to mysql bin. please add it to your PATH');
 			exit;
