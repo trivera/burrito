@@ -1,5 +1,4 @@
 <?php 
-
 defined('C5_EXECUTE') or die('Access Denied.');
 
 class DataHelper {
@@ -55,8 +54,9 @@ class DataHelper {
 				}
 				
 				foreach ($data[$key] as $value) {
-					if ($value) {
-						$model->save(array(
+					$newItem = BModel::get($field['relation_model']);
+					if (!is_null($value)) {
+						$newItem->save(array(
 							$field['foreign_key'] => $id,
 							$key => $value
 						));	
