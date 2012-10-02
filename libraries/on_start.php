@@ -34,3 +34,26 @@ if (!function_exists('d')) {
 		exit;
 	}	
 }
+
+/* 
+	Force a trailing slash to URLs
+	for SEO benefit.
+	
+	Comment out if you wish to disable.
+*/
+$frags = explode('?', $_SERVER['REQUEST_URI'], 2); 
+if(!User::isLoggedIn() && preg_match(',^/(?!tools|.php),', $frags[0]) && $_SERVER['REQUEST_METHOD'] == 'GET' && empty($_SERVER['argv'])){
+	$redirect = false;
+	if(substr($frags[0], 0, 1) != '/'){
+		$redirect = true;
+		$frags[0] = '/'.$frags[0];
+	}
+	if(substr($frags[0], -1) != '/'){
+		$redirect = true;
+		$frags[0] = $frags[0].'/';
+	}
+	if($redirect){
+		header('HTTP/1.1 301 Moved Permanently');
+		header('Location: '.BASE_URL.implode('?', $frags));
+	}
+}
