@@ -8,15 +8,14 @@
 <div class="ccm-ui">
 	<?php FlashHelper::render() ?>
 	<div class="ccm-pane">
-		<div class="ccm-pane-header">
-			<h3>
-				<?php echo ($edit) ? 'Edit' : 'Add' ?>	
-				<?php echo $title ?>
-			</h3>
-		</div>
+		<?php
+			$title = ($edit) ? 'Edit ' . $title : 'Add ' . $title; 
+			$dashboard = Loader::helper('concrete/dashboard');
+			echo $dashboard->getDashboardPaneHeader($title);
+		?>
 		<div class="ccm-pane-body">
 			<form id="dataForm" action="<?php echo $this->action('save') ?>" method="POST">
-				<table class="zebra-striped">
+				<table class="table table-striped table-bordered zebra-striped">
 					<tbody>
 						<?php foreach ($fields as $key => $field): ?>
 							<?php if ((isset($field['minimum_level']) && AccessHelper::canAccess($field['minimum_level'])) || !isset($field['minimum_level'])): ?>
