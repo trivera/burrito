@@ -37,8 +37,11 @@ class BurritoItemList extends DatabaseItemList {
 				$i++;
 			}
 		}
-		else {
+		elseif ($this->dateField) {
 			$this->sortByString = $this->dateField.' ASC';
+		}
+		else {
+			$this->sortByString = $this->sortBy;
 		}
 		
 		if ($this->fieldExists('q')) {
