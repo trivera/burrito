@@ -1,7 +1,4 @@
-<?php 
-	/*
-		Add a search and date filter to any dashboard item list
-	*/
+<?php
 	$form = Loader::helper('form'); 
 	$dtt = Loader::helper('form/date_time');
 ?>
@@ -9,8 +6,12 @@
 	<?php if (!$list->isFiltered()): ?>
 		<form style="margin-bottom: 0px;">
 			Search <?php echo $form->text('q') ?>	
-			Start Date <?php echo $dtt->date('d1', '') ?>
-			End Date <?php echo $dtt->date('d2', '') ?>
+			
+			<?php if ($includeDates !== false): ?>
+				Start Date <?php echo $dtt->date('d1', '') ?>
+				End Date <?php echo $dtt->date('d2', '') ?>
+			<?php endif; ?>
+			
 			<?php echo $form->submit('search', 'Filter Results', array('class' => 'primary')) ?>
 		</form>
 	<?php else: ?>

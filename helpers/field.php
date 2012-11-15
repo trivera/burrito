@@ -15,6 +15,9 @@ class FieldHelper {
 		if ($editMode && $field['multi'] && !$this->isFileField($field)) {
 			$html = '';
 			foreach ($data[$key] as $value) {
+				if (is_object($value)) {
+					$value = $value->$key;
+				}
 				$html .= '<div class="multi-clone">';
 				$html .= $this->generateHtml($key.'[]', $field, $value);
 				$html .= '</div>';
@@ -127,6 +130,9 @@ class FieldHelper {
 				$html = $form->select($key, $opts, $value);
 				break;
 			case 'user':
+				break;
+			case 'price':
+				$html = $form->text($key, $value);
 				break;
 		}
 		
