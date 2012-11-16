@@ -83,7 +83,7 @@ class BurritoItemList extends DatabaseItemList {
 			$this->setItemsPerPage($this->count);
 			
 			// if there's no page parameter, figure out what page contains the most recent items
-			if (!isset($_GET['ccm_paging_p']) && empty($sorts)) {
+			if (!$page && !isset($_GET['ccm_paging_p']) && empty($sorts)) {
 				$i = 0;
 				foreach ($items as $item) {
 					$today = strtotime('today');
@@ -98,7 +98,7 @@ class BurritoItemList extends DatabaseItemList {
 				}
 			}
 			else {
-				$this->startPage = $_GET['ccm_paging_p'];
+				$this->startPage = ($page) ? $page : $_GET['ccm_paging_p'];
 			}
 					
 			return $this->getPage($this->startPage);
