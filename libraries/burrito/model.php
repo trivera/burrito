@@ -155,8 +155,10 @@ class BurritoModel extends ADOdb_Active_Record {
 		$this->__callbacks('after');
 	}
 	
-	
-	
+	public function exists() {
+		$idKey = $this->getIdKey();
+		return ($this->$idKey);
+	}
 	
 	public function getFile($field) {
 		return File::getById($this->{$field});
