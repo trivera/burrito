@@ -152,6 +152,10 @@ abstract class CsvImport {
 		return is_numeric($value) ? (int)$value : 0;
 	}
 	
+	protected function floatFormat($value) {
+		return is_float((float)$value) ? (float) $value : 0.00;
+	}
+	
 	protected function stringFormat($value) {
 		return empty($value) ? null : $value;
 	}
