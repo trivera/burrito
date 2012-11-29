@@ -42,7 +42,7 @@ if (!function_exists('d')) {
 	Comment out if you wish to disable.
 */
 $frags = explode('?', $_SERVER['REQUEST_URI'], 2); 
-if(!User::isLoggedIn() && preg_match(',^/(?!tools|.php),', $frags[0]) && $_SERVER['REQUEST_METHOD'] == 'GET' && empty($_SERVER['argv'])){
+if(!User::isLoggedIn() && preg_match(',^/(?!tools|.php|.jpg|.jpeg|.png|.gif),', $frags[0]) && $_SERVER['REQUEST_METHOD'] == 'GET' && empty($_SERVER['argv'])){
 	$redirect = false;
 	if(substr($frags[0], 0, 1) != '/'){
 		$redirect = true;
