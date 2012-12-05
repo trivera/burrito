@@ -193,9 +193,12 @@ function _rsync($options) {
 	$ssh = BurritoConfig::env('sync', 'ssh');
 	
 	echo sprintf(
-		'-rvtzp --exclude="backups/*" --exclude="cache/*" --exclude="tmp/*" --exclude="trash/*" --progress --rsh="ssh" %s %s',
-		$ssh['user'].'@'.$ssh['host'].':'.$options['remote_dir'],
-		__C5__.$options['local_dir']
+		'-rvtzp --exclude="backups/*" --exclude="cache/*" --exclude="tmp/*" --exclude="trash/*" --progress --rsh="ssh %s" %s',
+		_ssh(array_merge(
+			BurritoConfig::env('sync', 'ssh'),	  	
+			array('path'=>$options['remote_dir'])
+		)),
+		dirname(__C5__.$options['local_dir'])
 	);
 	
 	return ob_get_clean();
