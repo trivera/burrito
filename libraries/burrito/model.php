@@ -179,12 +179,15 @@ class BurritoModel extends ADOdb_Active_Record {
 		Generates & returns a key => value array suitable for using in C5's 
 		form helper select input function.
 	*/
-	public function getSelectOptions($idKey = 'id', $displayKey = 'name', $blankText = null, $blankKey = '') {
+	public function getSelectOptions($idKey = 'id', $displayKey = 'name', $blankText = null, $blankKey = '', $sort = true) {
 		$items = array();
 		if ($blankText) {
 			$items[$blankKey] = $blankText;
 		}
-		foreach ($this->find('1=1 ORDER BY '.$displayKey.' ASC') as $item) {
+		
+		$sortText = ($sort) ? ' ORDER BY '.$displayKey.' ASC' : '';
+		
+		foreach ($this->find('1=1'.$sortText) as $item) {
 			$items[$item->$idKey] = $item->$displayKey;
 		}
 		return $items;
