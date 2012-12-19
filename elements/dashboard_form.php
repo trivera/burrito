@@ -1,6 +1,8 @@
 <?php
-	Loader::element('editor_init');
-	Loader::element('editor_config');
+	if ($loadWysiwyg !== false) {
+		Loader::element('editor_init');
+		Loader::element('editor_config');
+	}
 	$fh = Loader::helper('field', 'burrito');
 	$edit = (isset($data['id']));
 ?>
