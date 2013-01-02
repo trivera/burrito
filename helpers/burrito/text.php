@@ -11,4 +11,9 @@ class BurritoTextHelper extends TextHelper {
 		return $_;
 	}
 	
+	public function phoneNumber($number, $format = '($1) $2-$3') {
+		// Jacked from http://stackoverflow.com/questions/4708248/formatting-phone-numbers-in-php ;)
+		return preg_replace('~.*(\d{3})[^\d]*(\d{3})[^\d]*(\d{4}).*~', $format, $number);
+	}
+	
 }
