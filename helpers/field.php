@@ -26,7 +26,6 @@ class FieldHelper {
 				$html .= $this->generateHtml($key.'[]', $field, $value);
 				$html .= '</div>';
 			}
-			$this->form->reset();
 		}
 		elseif (!($field['multi'] && $this->isFileField($field) && $editMode)) {
 			// Weird condition here but basically we don't want to generate HTML for multi-file type fields when in edit mode
@@ -34,6 +33,8 @@ class FieldHelper {
 			$key = ($field['multi'] && !$this->isFileField($field)) ? $key.'[]' : $key;
 			$html = $this->generateHtml($key, $field, $value, $data);
 		}
+		
+		$this->form->reset();
 		
 		// autoEcho preserves backwards compatibility with older (likely moldy) burritos that do not auto-echo
 		if ($autoEcho) {
