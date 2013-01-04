@@ -21,7 +21,6 @@
 					<tbody>
 						<?php foreach ($fields as $key => $field): ?>
 							<?php if ((isset($field['minimum_level']) && AccessHelper::canAccess($field['minimum_level'])) || !isset($field['minimum_level'])): ?>
-								
 								<tr id="row-<?php echo $key ?>">
 									<td class="form-label">
 										<?php echo $field['label'] ?>

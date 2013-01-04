@@ -13,12 +13,12 @@
 	var <?php echo $th->camelcase($key) ?>Multi = function() {
 		var i = 1;
 		var key = '<?php echo $key ?>';
-		var rootElement = '#'+key+'1';
-		var container = '#'+key+'-items';
+		var rootElement = '#' + key + '1';
+		var container = '#' + key + '-items';
 		
 		var addRow = function() {
 			i++;
-			var newElement = $(rootElement).clone().attr('id', key + i);
+			var newElement = $(rootElement).clone().attr('id', key + i).val('');
 			var elWrapper = $('<div class="multi-clone">');
 			elWrapper.append(newElement);
 			$(container).append(elWrapper.append($('<a href="#" class="remove">[x]</a>')));
@@ -38,18 +38,21 @@
 			addRow();
 		});
 		
+		<?php if (!empty($data[$key])): ?>
+			$('#' + key + '-fieldContainer .multi-clone').each(function(j) {
+				if (j > 0) {
+					var removeLink = $('<a href="#" class="remove">[x]</a>');
+					$(this).append(removeLink);
+					$(removeLink).click(function(e){
+						e.preventDefault();
+						$(this).parent('div').remove();
+					});
+				}
+				
+			});
+		<?php endif; ?>
+		
 	};
+	
 	<?php echo $th->camelcase($key) ?>Multi();
-	<?php if (!empty($data[$key])): ?>
-		$('.multi-clone').each(function(i){
-			if (i > 0) {
-				var removeLink = $('<a href="#" class="remove">[x]</a>');
-				$(this).append(removeLink);
-				$(removeLink).click(function(e){
-					e.preventDefault();
-				    $(this).parent('div').remove();
-				});
-			}
-		});
-	<?php endif; ?>
 </script>
