@@ -58,6 +58,9 @@ class FlashHelper {
 		if (self::has('error')) {
 			Loader::packageElement('errors', 'burrito', array('errors' => self::get('error', true)));
 		}
+		elseif (self::has('notice')) {
+			Loader::packageElement('notice', 'burrito', array('notices' => self::get('notice', true)));
+		}
 	}
 	
 	// PHP < 5.3 does not support late static binding :(
