@@ -64,10 +64,16 @@ class BurritoModel extends ADOdb_Active_Record {
 	/* 
 		Skip all of the Loader::model BS and just get a class
 	*/
-	public static function get($handle, $id = null, $idKey = 'id') {
+	public static function get($handle, $id = null, $idKey = 'id', $pkgHandle = null) {
 		$th = Loader::helper('text');
-
-		Loader::model($handle);
+		
+		if ($pkgHandle) {
+			Loader::model($handle, $pkgHandle);
+		}
+		else {
+			Loader::model($handle);
+		}
+		
 		$className = $th->camelcase($handle);
 		$class = new $className;
 		if ($id) {
