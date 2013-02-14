@@ -76,6 +76,11 @@ class BurritoModel extends ADOdb_Active_Record {
 		return $class;
 	}
 	
+	/* Just a wrapper to make it easier to get package models */
+	public static function getPkg($handle, $pkgHandle, $id = null, $idKey = 'id') {
+		return self::get($handle, $id, $idKey, $pkgHandle);
+	}
+	
 	/*
 	   Skip all of the Loader::model BS and just saturate a class with pre-fetched data
 	*/
